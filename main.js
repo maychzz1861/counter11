@@ -37,7 +37,7 @@ function App() {
   };
 
   const hdlAddCounter = () => {
-    const newId = counters.length === 0 ? 1 : counters.at(-1).id + 1;
+    const newId = counters.length === 0 ? 1 : counters[counters.length - 1].id + 1;
     const cloneCounters = [...counters];
     cloneCounters.push({ id: newId, number: 0 });
     setCounters(cloneCounters);
@@ -53,13 +53,11 @@ function App() {
   return (
     <>
       <SumInfo color="red" size="big" sum={sum} hdlAddCounter={hdlAddCounter} />
-      {counters.map((el) => {
-        return (
-          <div key={el.id}>
-            <Counter item={el} hdlUpdate={hdlUpdate} hdlRemove={hdlRemoveCounter} />
-          </div>
-        );
-      })}
+      {counters.map((el) => (
+        <div key={el.id}>
+          <Counter item={el} hdlUpdate={hdlUpdate} hdlRemove={hdlRemoveCounter} />
+        </div>
+      ))}
     </>
   );
 }
